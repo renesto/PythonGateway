@@ -1,4 +1,4 @@
-ARG IMAGE=store/intersystems/iris:2019.3.0.302.0-community
+ARG IMAGE=store/intersystems/iris-community:2019.3.0.309.0
 FROM ${IMAGE}
 
 
@@ -91,17 +91,32 @@ RUN set -ex; \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 
-RUN pip install pandas matplotlib seaborn numpy dill
+RUN pip install pandas matplotlib seaborn numpy dill Pillow "tensorflow>=2.0.0" tensorflow-hub tqdm
 
 # now for InterSystems IRIS
 
-USER irisowner
+USER root
 
 ENV SRC_DIR=/home/irisowner
 
 COPY --chown=irisowner ./isc/ $SRC_DIR/isc
 COPY --chown=irisowner ./rtn/ $SRC_DIR/rtn
-COPY --chown=irisowner iscpython.so $ISC_PACKAGE_INSTALLDIR/bin/
+COPY --chown=irisowner ./iscpython.o $ISC_PACKAGE_INSTALLDIR/bin/iscpython.o
+COPY --chown=irisowner ./iscpython.so $ISC_PACKAGE_INSTALLDIR/bin/iscpython.so
+
+COPY --chown=irisuser ./pycode /home/irisuser/pycode
+COPY --chown=irisuser ./samples /home/irisuser/samples
+COPY --chown=irisuser ./od $SRC_DIR/od
+
+RUN set -ex \
+    \
+    && wget -O inception.tar "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1?tf-hub-format=compressed" \
+    && mkdir -p /home/irisuser/models \
+    && tar -xvf inception.tar -C /home/irisuser/models  \
+	&& rm inception.tar \
+	&& chown -R irisuser:irisuser /home/irisuser/models
+
+USER irisowner
 
 
 RUN iris start $ISC_PACKAGE_INSTANCENAME && \

@@ -16,6 +16,7 @@ XData Install [ XMLNamespace = INSTALLER ]
     </Configuration>
 
     <Import File="${SOURCESPATH}isc" Recurse="1"/>
+    <Import File="${SOURCESPATH}od" Recurse="1"/>
     
     <Log Level="1" Text="Configuring Production"/>
     <Invoke Class="isc.py.util.Installer" Method="ConfigureProduction" CheckStatus="true"/>

@@ -17,6 +17,10 @@ XData Install [ XMLNamespace = INSTALLER ]
 
     <Import File="${SOURCESPATH}isc" Recurse="1"/>
     <Import File="${SOURCESPATH}od" Recurse="1"/>
+    <Import File="/usr/irissys/csp/python/index.csp"/>
+
+
+	<CSPApplication Url="/csp/${Namespace}" Directory="${CSPDIR}${Namespace}" />
     
     <Log Level="1" Text="Configuring Production"/>
     <Invoke Class="isc.py.util.Installer" Method="ConfigureProduction" CheckStatus="true"/>

@@ -104,9 +104,11 @@ COPY --chown=irisowner ./rtn/ $SRC_DIR/rtn
 COPY --chown=irisowner ./iscpython.o $ISC_PACKAGE_INSTALLDIR/bin/iscpython.o
 COPY --chown=irisowner ./iscpython.so $ISC_PACKAGE_INSTALLDIR/bin/iscpython.so
 
+COPY --chown=irisowner ./od/ $SRC_DIR/od
 COPY --chown=irisuser ./pycode /home/irisuser/pycode
 COPY --chown=irisuser ./samples /home/irisuser/samples
-COPY --chown=irisuser ./od $SRC_DIR/od
+COPY --chown=irisuser ./web /usr/irissys/csp/python
+
 
 RUN set -ex \
     \

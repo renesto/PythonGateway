@@ -1,0 +1,42 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="main.js"></script>
+<title>AI / ML Experience - Object Detection </title>
+</head>
+<body>
+<div id="document">
+<div class="header" id="myHeader">
+	<div class="wide">
+  <h1>AI / ML Experience - Object Detection</h1></div>
+  <div class="narrow"><img class="right" src="logo.png"/></div>
+</div> 
+  <main>
+  	<div class="spaceFiller"></div>
+  	<div class="inline">
+  	<div id="camera" class="containerbig"><h2>Camera</h2><img src="fruitshelf.jpg"/></div>
+  	<div class="containersmall"><img src="arrow.svg"/></div>  	
+  	<div id="interoperability" class="containerbig"><h2>Interoperability</h2><img src="interoperability.png"/></div>
+  	<div class="containersmall"><img src="arrow.svg"/></div>
+  	<div id="objectdetection" class="containerbig"><h2>Recognize objects</h2><img src="TensorFlowLogo.svg"/><img src="Python_logo.svg"/></div>
+  </div>
+
+  	<div class="containersmall"><img src="arrow-left.svg"/></div>
+  	<div class="containersmall"><img src="arrow-down.svg"/></div>
+  	
+
+  </main>
+  <div class="footer">
+  	<div class="narrow">
+  		<img class="left" src="footerLeft.png"/>
+  	</div>
+  	<div class="wide"></div>
+  	<div class="narrow">
+  		<img class="right" src="footerRight.png"/>
+  		</div>
+    
+  </div>
+</div>
+</body>
+</html>
+

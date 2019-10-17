@@ -1,0 +1,166 @@
+@font-face {
+    font-family: Gotham;
+    src: url("Gotham-Black.otf") format("opentype");
+}
+
+body {
+	font-family: Gotham, serif;
+	text-shadow: 1px 1px #aaa;
+}
+
+
+
+.header {
+  border-bottom: 10px solid black;
+  flex-shrink: 0;
+  display:flex;
+  background: rgba(78,175,168,1);
+  color:#ffffff;
+  text-shadow: 1px 1px #888;
+ }
+
+
+.header .narrow {
+  flex-shrink: 0;
+  margin:0;
+  padding-left:20px;
+  align-items: center;
+  display:flex;
+  border-left: 10px solid black;
+  padding-left:40px;
+  padding-right:40px;
+  background:#FFFFFF;
+
+  /* Just so it's visible */
+}
+.header .wide {
+  padding-left:40px;
+
+  flex: 1;
+  /* Grow to rest of container */
+  
+  /* Just so it's visible */
+}
+
+
+.header .right {
+  height:50px;
+  margin:0;
+  padding:0;
+} 
+
+#document { 
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    border:10px solid black;
+    margin:5px 5px 5px 5px;
+}
+
+main {
+  flex: auto;
+  overflow:auto;
+  padding-left:20px;
+  padding-right:20px;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
+.footer {
+  color: white;
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+}
+
+
+.footer img.right {
+  height:200px;
+  margin:0;
+  padding:0;
+}
+
+
+.footer img.left {
+  height:150px;
+  margin:0;
+  margin-left:-3px;
+  padding:0;
+}
+.footer .narrow {
+  flex-shrink: 0;
+  margin:0;
+  padding:0;
+  align-items: flex-end;
+  display:flex;
+
+  /* Just so it's visible */
+}
+.footer .wide {
+  flex: 1;
+  /* Grow to rest of container */
+  
+  /* Just so it's visible */
+}
+
+.footer > h1 {
+  text-shadow: 1px 1px 4px #00000080;
+}
+
+.inline {
+	text-align: center;
+	display:flex;
+	flex-wrap: wrap;
+	justify-content:center;
+	align-content:center;
+
+}
+
+
+.containersmall {
+  height: 120px;
+  display: flex;
+  margin: auto;
+  
+  
+}
+
+.containersmall img {
+  display: block;
+  margin: auto;
+  vertical-align: middle;
+  max-height: 80%;
+  max-width: 100%;
+}
+
+.containerbig {
+  height: 120px;
+  width: auto;
+  vertical-align: middle;
+  padding-left:5px;
+  padding-right:5px;
+
+  /*flex:0.5;*/
+  background: rgba(255,192,0,1); /* dirty yellow */
+  /*rgba(98,165,229,0.5);*/ /* blue */
+  
+/*  rgba(251,127,65,1);*/ /* tirquise */ 
+  border: solid black 5px;
+  text-align: center;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.containerbig img {
+  max-height: 60px;
+  max-width: 100%;
+  margin-top:-10px;
+  -webkit-filter: drop-shadow(0 0 1rem rgba(98,165,229,1));
+  filter: drop-shadow(0 0 1rem rgba(98,165,229,1));
+}
+.spaceFiller {
+	padding: 20px;
+}

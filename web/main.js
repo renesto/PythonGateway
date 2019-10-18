@@ -2,7 +2,7 @@
 /*
 Modify links to boxes here
 */
-var linkMap={
+/*var linkMap={
 	"camera":"http://www.google.com",
 	"interoperability":"EnsPortal.ProductionConfig.zen?$NAMESPACE=PYTHON&IRISUserName=SuperUser&IRISPassword=SYS",
 	"objectdetection":"EnsPortal.BPLEditor.zen?NAMESPACE=PYTHON&BP=od.DetectObject.bpl&IRISUserName=SuperUser&IRISPassword=SYS"
@@ -21,4 +21,4 @@ window.onload=function() {
 		};
 		console.log(linkMap[key]);
 	};
-}
+}*/

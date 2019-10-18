@@ -18,6 +18,7 @@ XData Install [ XMLNamespace = INSTALLER ]
     <Import File="${SOURCESPATH}isc" Recurse="1"/>
     <Import File="${SOURCESPATH}od" Recurse="1"/>
     <Import File="/usr/irissys/csp/python/index.csp"/>
+    <Import File="/usr/irissys/csp/python/camera.csp"/>
 
 
 	<CSPApplication Url="/csp/${Namespace}" Directory="${CSPDIR}${Namespace}" />

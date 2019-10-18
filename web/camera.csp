@@ -1,0 +1,66 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="main.js"></script>
+<title>AI / ML Experience - Object Detection </title>
+</head>
+<body>
+<div id="document">
+<div class="header" id="myHeader">
+	<div class="wide">
+  <h1>AI / ML Experience - Object Detection</h1></div>
+  <div class="narrow"><img class="right" src="logo.png"/></div>
+</div> 
+  <main>
+
+  	<div class="spaceFiller"></div>
+    <div class="">
+    <div class="w3-content w3-display-container">
+    <img class="mySlides" src="shelf_images/Fruitshelf1.jpg">
+    <img class="mySlides" src="shelf_images/Fruitshelf2.jpg">
+    <img class="mySlides" src="shelf_images/Fruitshelf3.jpg">
+    <img class="mySlides" src="shelf_images/Fruitshelf4.jpg">
+<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+</div>
+<button class="w3-button w3-black w3-display-middle" onclick="alert(slideIndex)">Submit</button>
+</div>
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
+<!--
+  	<div class="containersmall"><img src="arrow-left.svg"/></div>
+  	<div class="containersmall"><img src="arrow-down.svg"/></div>
+  	-->
+
+  </main>
+  <div class="footer">
+  	<div class="narrow">
+  		<img class="left" src="footerLeft.png"/>
+  	</div>
+  	<div class="wide"></div>
+  	<div class="narrow">
+  		<img class="right" src="footerRight.png"/>
+  		</div>
+    
+  </div>
+</div>
+</body>
+</html>
+

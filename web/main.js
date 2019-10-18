@@ -22,3 +22,18 @@ window.onload=function() {
 		console.log(linkMap[key]);
 	};
 }*/
+
+function sendImage(index) {
+	request={};
+	request.path="shelf_images";
+	request.file="Fruitshelf"+str(index);
+	// construct an HTTP requests
+  	var xhr = new XMLHttpRequest();
+  	xhr.open("POST", "https://www.google.com", true);
+  	xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+  	// send the collected data as JSON
+  	xhr.send(JSON.stringify(request));
+  	xhr.onloadend = function () {
+    	alert("Image sent for recognition")
+  	};
+}

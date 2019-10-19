@@ -63,4 +63,3 @@ Method GetString(flush As %Boolean = {$$$YES}) As %String
 }
 
 }
-

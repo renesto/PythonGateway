@@ -80,4 +80,3 @@ ClassMethod EvalCode(code As %String) As %String
 }
 
 }
-

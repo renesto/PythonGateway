@@ -70,8 +70,7 @@ Storage Default
 </Value>
 </Data>
 <DefaultData>GlobalRequestDefaultData</DefaultData>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

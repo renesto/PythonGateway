@@ -23,7 +23,7 @@ Storage Default
 </Value>
 </Data>
 <DefaultData>ProcessDefaultData</DefaultData>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 /// BPL Definition
@@ -54,7 +54,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <case condition='process.ConnectionType="JDBC"' name='JDBC' >
 <call name='JDBC' target='isc.py.ens.Operation' async='1' xpos='605' ypos='600' >
 <annotation><![CDATA[import jaydebeapi
-cnxn=jaydebeapi.connect("com.intersystems.jdbc.IRISDriver","jdbc:IRIS://localhost:51773/Python",  ["dev", "123"], "/InterSystems/IRIS/dev/java/lib/JDK18/intersystems-jdbc-3.0.0.jar")
+cnxn=jaydebeapi.connect("com.intersystems.jdbc.IRISDriver","jdbc:IRIS://localhost:51773/PYTHON",  ["Admin", "SYS"], "/usr/irissys/dev/java/lib/JDK18/intersystems-jdbc-3.0.0.jar")
 Data=pd.read_sql('SELECT * FROM isc_py_test.CannibalizationData',cnxn)
 cnxn.close()]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
@@ -66,7 +66,7 @@ cnxn.close()]]></annotation>
 <case condition='process.ConnectionType="ODBC"' name='ODBC' >
 <call name='ODBC' target='isc.py.ens.Operation' async='1' xpos='875' ypos='600' >
 <annotation><![CDATA[import pyodbc
-cnxn=pyodbc.connect(('DSN=ENSEMBLE(PYTHON);UID=dev;PWD=123'),autocommit=True)
+cnxn=pyodbc.connect(('Driver=/usr/irissys/bin/libirisodbcu35.so;Server=localhost;Port=51773;database=PYTHON;UID=Admin;PWD=SYS;'),autocommit=True)
 Data=pd.read_sql('SELECT * FROM isc_py_test.CannibalizationData',cnxn)
 cnxn.close()]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
@@ -127,4 +127,3 @@ plt.close(f)
 }
 
 }
-

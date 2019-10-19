@@ -826,4 +826,3 @@ Method DeleteModule(module As %String) As %Status
 }
 
 }
-

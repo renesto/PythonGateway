@@ -332,4 +332,3 @@ Method %Rename(variable As %String) As %Status
 }
 
 }
-

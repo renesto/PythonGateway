@@ -88,8 +88,7 @@ Storage Default
 <IdLocation>^isc.py.data.FunctionD</IdLocation>
 <IndexLocation>^isc.py.data.FunctionI</IndexLocation>
 <StreamLocation>^isc.py.data.FunctionS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

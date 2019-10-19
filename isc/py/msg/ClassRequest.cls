@@ -45,8 +45,7 @@ Storage Default
 </Value>
 </Data>
 <DefaultData>ClassRequestDefaultData</DefaultData>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

@@ -492,4 +492,3 @@ Method TestProxyObject()
 }
 
 }
-

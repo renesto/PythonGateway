@@ -228,4 +228,3 @@ Method RestoreContext(request As isc.py.msg.RestoreRequest, Output response As E
 }
 
 }
-

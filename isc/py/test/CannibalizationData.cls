@@ -298,8 +298,7 @@ Storage Default
 <IdLocation>^isc.py.test.CannibalizaE0CCD</IdLocation>
 <IndexLocation>^isc.py.test.CannibalizaE0CCI</IndexLocation>
 <StreamLocation>^isc.py.test.CannibalizaE0CCS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

@@ -14,4 +14,3 @@ Property Type As %String(VALUELIST = ",dataframe,list") [ InitialExpression = "l
 Property Namespace As %String [ InitialExpression = {$namespace}, Required ];
 
 }
-

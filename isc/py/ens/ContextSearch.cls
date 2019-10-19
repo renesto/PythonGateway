@@ -25,4 +25,3 @@ ClassMethod SubclassOf(Output caption As %String, Output topResults, Output resu
 }
 
 }
-

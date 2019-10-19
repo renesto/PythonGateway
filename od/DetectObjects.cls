@@ -2,11 +2,6 @@
 Class od.DetectObjects Extends (Ens.BusinessProcessBPL, isc.py.ens.ProcessUtils)
 {
 
-Storage Default
-{
-<Type>%Storage.Persistent</Type>
-}
-
 /// BPL Definition
 XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 {
@@ -28,7 +23,7 @@ from PIL import Image, ImageColor, ImageDraw, ImageFont, ImageOps
 from tqdm import tqdm
 
 import sys
-sys.path.append(r'/home/irisowner/pycode')]]></annotation>
+sys.path.append(r'/home/irisuser/pycode')]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value="process.GetAnnotation(&quot;Import Python Libraries&quot;)" action="set" />
 </request>
@@ -67,5 +62,9 @@ result = od_detect.detect_image(sample_image_path)]]></annotation>
 </process>
 }
 
+Storage Default
+{
+<Type>%Storage.Persistent</Type>
 }
 
+}

@@ -89,4 +89,3 @@ ClassMethod FilterList(input As %List, whiteMask As %List = "", blackMask As %Li
 }
 
 }
-

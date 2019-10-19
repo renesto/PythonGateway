@@ -71,4 +71,3 @@ ClassMethod InitZEmployee() As %Status [ CodeMode = expression ]
 }
 
 }
-

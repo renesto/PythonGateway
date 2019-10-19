@@ -26,10 +26,10 @@ window.onload=function() {
 function sendImage(index) {
 	request={};
 	request.path="shelf_images";
-	request.file="Fruitshelf"+str(index);
+	request.file="Fruitshelf"+index.toString();
 	// construct an HTTP requests
   	var xhr = new XMLHttpRequest();
-  	xhr.open("POST", "https://www.google.com", true);
+  	xhr.open("GET", "/rest/imageod/sendImage/"+index.toString(), true);
   	xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
   	// send the collected data as JSON
   	xhr.send(JSON.stringify(request));

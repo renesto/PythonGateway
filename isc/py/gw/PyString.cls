@@ -27,4 +27,3 @@ Method Set(%val) [ CodeMode = objectgenerator, NoContext ]
 }
 
 }
-

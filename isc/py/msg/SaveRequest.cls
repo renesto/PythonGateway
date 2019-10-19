@@ -37,8 +37,7 @@ Storage Default
 </Value>
 </Data>
 <DefaultData>SaveRequestDefaultData</DefaultData>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

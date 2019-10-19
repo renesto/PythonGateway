@@ -49,4 +49,3 @@ ClassMethod Shell()
 }
 
 }
-

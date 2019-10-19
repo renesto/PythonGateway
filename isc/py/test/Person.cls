@@ -130,8 +130,7 @@ Storage Default
 <IdLocation>^isc.py.test.PersonD</IdLocation>
 <IndexLocation>^isc.py.test.PersonI</IndexLocation>
 <StreamLocation>^isc.py.test.PersonS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

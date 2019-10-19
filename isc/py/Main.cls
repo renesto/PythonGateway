@@ -947,4 +947,3 @@ ClassMethod GetVariablePickle(variable As %String, ByRef stream As %Stream.Objec
 }
 
 }
-

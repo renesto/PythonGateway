@@ -62,4 +62,3 @@ ClassMethod GetXMLName(class As %Dictionary.CacheClassname = {$classname()}) As 
 }
 
 }
-

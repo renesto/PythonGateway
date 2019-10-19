@@ -12,8 +12,7 @@ Storage Default
 <Structure>subnode</Structure>
 <Subscript>"isc.py.msg.ExecutionResponse.Variables"</Subscript>
 </Data>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

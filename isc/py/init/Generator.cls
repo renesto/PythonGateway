@@ -16,4 +16,3 @@ ClassMethod InitUncallable() As %Status [ CodeMode = expression ]
 }
 
 }
-

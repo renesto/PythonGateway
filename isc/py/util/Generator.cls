@@ -134,4 +134,3 @@ ClassMethod IsClassMethod(type, method) As %Boolean
 }
 
 }
-

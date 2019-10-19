@@ -75,4 +75,3 @@ ClassMethod ParseActivities(activities As Ens.BPL.ActivityList)
 }
 
 }
-

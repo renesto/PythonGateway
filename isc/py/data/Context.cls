@@ -307,8 +307,7 @@ Storage Default
 <IdLocation>^isc.py.data.ContextD</IdLocation>
 <IndexLocation>^isc.py.data.ContextI</IndexLocation>
 <StreamLocation>^isc.py.data.ContextS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

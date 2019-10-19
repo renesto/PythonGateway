@@ -35,8 +35,7 @@ Storage Default
 </Value>
 </Data>
 <DefaultData>StreamExecutionRequestDefaultData</DefaultData>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

@@ -142,8 +142,7 @@ Storage Default
 <IdLocation>^isc.py.data.VariableD</IdLocation>
 <IndexLocation>^isc.py.data.VariableI</IndexLocation>
 <StreamLocation>^isc.py.data.VariableS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

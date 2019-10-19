@@ -134,4 +134,3 @@ ClassMethod DescribeDataframe(variable) As %Status
 }
 
 }
-

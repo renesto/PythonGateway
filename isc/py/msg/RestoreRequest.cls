@@ -20,8 +20,7 @@ Storage Default
 </Value>
 </Data>
 <DefaultData>RestoreRequestDefaultData</DefaultData>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
-

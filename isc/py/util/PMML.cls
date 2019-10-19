@@ -199,4 +199,3 @@ ClassMethod Test(class As %Dictionary.CacheClassname = "Test.SKLModel") As %Stat
 }
 
 }
-

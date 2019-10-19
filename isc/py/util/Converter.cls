@@ -171,4 +171,3 @@ ClassMethod LocalToList(ByRef local) As %List
 }
 
 }
-

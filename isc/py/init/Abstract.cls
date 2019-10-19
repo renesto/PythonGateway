@@ -121,4 +121,3 @@ ClassMethod Log(msg As %String)
 }
 
 }
-

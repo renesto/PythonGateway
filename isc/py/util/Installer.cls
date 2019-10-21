@@ -39,14 +39,24 @@ XData Install [ XMLNamespace = INSTALLER ]
     <Invoke Class="isc.py.util.Installer" Method="LoadZRoutines" CheckStatus="true">
     <Arg Value="${SOURCESPATH}rtn"/>
     </Invoke>
+
+    <Invoke Class="isc.py.util.Installer" Method="CreateREST">
+   <Arg Value="${NameSpace}"/>
+   <Arg Value="/rest/imageod"/>
+   <Arg Value="od.RestServer"/>
+   </Invoke>
+
+    <Production Name="isc.py.test.Production"  AutoStart="1" />
   </Namespace>
 </Manifest>
 }
+
 
 ClassMethod Setup(ByRef pVars, pLogLevel As %Integer = 3, pInstaller As %Installer.Installer, pLogger As %Installer.AbstractLogger) As %Status [ CodeMode = objectgenerator, Internal ]
 {
   Quit ##class(%Installer.Manifest).%Generate(%compiledclass, %code, "Install")
 }
+
 
 /// Set production as default. 
 /// Load test data
@@ -169,5 +179,23 @@ ClassMethod PatchBP() As %Status
 	set db.ReadOnly = bk 
 	quit db.%Save()
 }
+
+ClassMethod CreateREST(namespace2 As %String, url As %String, dispatch As %String) As %Status
+{
+
+	#dim sc As %Status = $$$OK
+    new $namespace
+    set $namespace = "%SYS"
+    if '##class(Security.Applications).Exists(url) {
+        set props("AutheEnabled") = $$$AutheCache
+        set props("NameSpace") = namespace2
+        set props("IsNameSpaceDefault") = $$$NO
+        set props("DispatchClass") = dispatch
+        set props("MatchRoles")=":" _ $$$AllRoleName
+        set sc = ##class(Security.Applications).Create(url, .props)
+    }
+    quit sc
+}
+
 
 }

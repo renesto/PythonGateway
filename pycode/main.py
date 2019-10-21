@@ -1,5 +1,4 @@
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 from pprint import pprint
 from six import BytesIO
 
@@ -17,7 +16,7 @@ from PIL import Image, ImageColor, ImageDraw, ImageFont, ImageOps
 from tqdm import tqdm
 
 import sys
-sys.path.append(r'/home/irisowner/pycode')
+sys.path.append(r'/home/irisuser/pycode')
 
 import od_utils
 

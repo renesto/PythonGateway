@@ -14,6 +14,23 @@ Storage Default
 XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 {
 <process language='objectscript' request='od.msg.ImageODRequest' response='Ens.Response' height='2000' width='2000' >
+<context>
+<property name='ObjectsAsString' type='%String' instantiate='0' >
+<parameters>
+<parameter name='MAXLEN'  value='2500' />
+</parameters>
+</property>
+<property name='exportableDF' type='%String' collection='array' instantiate='0' >
+<parameters>
+<parameter name='MAXLEN'  value='' />
+</parameters>
+</property>
+<property name='listDF' type='%String' collection='list' instantiate='0' >
+<parameters>
+<parameter name='MAXLEN'  value='' />
+</parameters>
+</property>
+</context>
 <sequence xend='200' yend='850' >
 <call name='Send Value To Python' target='isc.py.ens.Operation' async='0' timeout='3000' xpos='200' ypos='250' >
 <request type='isc.py.msg.ExecutionRequest' >
@@ -49,7 +66,7 @@ import od_detect
 </request>
 <response type='Ens.Response' />
 </call>
-<call name='Detect Objects' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='550' >
+<call name='Detect Objects' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='450' >
 <annotation><![CDATA[resultOut = od_detect.detect_image(sample_image_path)
 result=resultOut['result']
 image_out=resultOut['image']
@@ -60,17 +77,22 @@ image_out=resultOut['image']
 </request>
 <response type='Ens.Response' />
 </call>
-<call name='Prepare Results' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='650' >
+<call name='Prepare Results' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='550' >
 <annotation><![CDATA[resultDF=pd.DataFrame(od_utils.TFtoPANDAS(result))
 resultDF=resultDF.loc[resultDF.reset_index().groupby(['objectID'])['Score'].idxmax()]
 resultDF=resultDF[resultDF['Class']!=b'Shelf']
-]]></annotation>
+exportableDF=resultDF[resultDF['Score']>0.2].to_csv(index=False)]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value="process.GetAnnotation(&quot;Prepare Results&quot;)" action="set" />
-<assign property="callrequest.Variables" value="&quot;resultDF&quot;" action="set" />
+<assign property="callrequest.Variables" value="&quot;exportableDF&quot;" action="set" />
 </request>
-<response type='Ens.Response' />
+<response type='isc.py.msg.ExecutionResponse' >
+<assign property="context.ObjectsAsString" value="callresponse.Variables" action="set" />
+</response>
 </call>
+<code xpos='200' ypos='650' disabled="true">
+<![CDATA[ s ^exportableDF = context.exportableDF]]>
+</code>
 <call name='Annotate Image' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='750' >
 <annotation><![CDATA[image_with_boxes = od_utils.draw_boxes(np.array(image_out), resultDF[['Ymin','Xmin','Ymax','Xmax']].to_numpy(),resultDF['Class'].to_numpy(), resultDF['Score'].to_numpy(), max_boxes=100, min_score=0.2)
 im = Image.fromarray(image_with_boxes)

@@ -188,7 +188,7 @@ ClassMethod CreateREST(namespace2 As %String, url As %String, dispatch As %Strin
     set $namespace = "%SYS"
     if '##class(Security.Applications).Exists(url) {
         set props("AutheEnabled") = $$$AutheCache
-        set props("NameSpace") = namespace2
+        set props("NameSpace") = "PYTHON"
         set props("IsNameSpaceDefault") = $$$NO
         set props("DispatchClass") = dispatch
         set props("MatchRoles")=":" _ $$$AllRoleName

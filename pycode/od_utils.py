@@ -1,3 +1,55 @@
+import pandas as pd
+from collections import namedtuple
+from PIL import Image, ImageColor, ImageDraw, ImageFont, ImageOps
+from tqdm import tqdm
+import time
+from pprint import pprint
+from six import BytesIO
+from collections import namedtuple
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+def overlapPercentage(xa1,ya1,xa2,ya2, xb1,yb1,xb2,yb2):  # returns None if rectangles don't intersect
+    Rectangle = namedtuple('Rectangle', 'xmin ymin xmax ymax')
+    a = Rectangle(xa1,ya1,xa2,ya2)
+    b = Rectangle(xb1,yb1,xb2,yb2)
+    dx = min(a.xmax, b.xmax) - max(a.xmin, b.xmin)
+    dy = min(a.ymax, b.ymax) - max(a.ymin, b.ymin)
+    if (dx>=0) and (dy>=0):
+        return ((dx*dy / ((xa2-xa1)*(ya2-ya1))) + (dx*dy / ((xb2-xb1)*(yb2-yb1))))/2
+    else:
+        return 0
+
+
+def defineObjects(overlapMin=0.8, result_out=[None]):
+    cut_off_scores = len(list(result_out['detection_scores']))
+    overlap = [None] * cut_off_scores
+    group=1
+    j=0
+    while j < cut_off_scores:
+        k=j+1
+        while k < cut_off_scores:
+            x11,y11,x12,y12 = result_out['detection_boxes'][j]
+            x21,y21,x22,y22 = result_out['detection_boxes'][k]
+            if overlapPercentage(x11,y11,x12,y12,x21,y21,x22,y22)>overlapMin:
+                if overlap[j] != None:
+                    overlap[k]=overlap[j]
+                elif overlap[k] != None:
+                    overlap[j]=overlap[k]
+                else:
+                    overlap[j]=overlap[k]=group
+                    group=group+1
+            k=k+1
+        j=j+1
+    j=0
+    while j < cut_off_scores:
+        if overlap[j]==None:
+            overlap[j]=group
+            group=group+1
+        j=j+1
+    return overlap
 
 def format_prediction_string(image_id, result):
     prediction_strings = []
@@ -91,4 +143,28 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=10, min_score=0.1):
             np.copyto(image, np.array(image_pil))
     return image
 
-
+def TFtoPANDAS(result_out):
+  cut_off_scores = len(list(result_out['detection_scores']))
+  detect_scores = []
+  detect_classes = []
+  detect_ymin = []
+  detect_xmin = []
+  detect_ymax = []
+  detect_xmax = []
+  for j in range(cut_off_scores):
+      detect_scores.append(result_out['detection_scores'][j])
+      detect_classes.append(result_out['detection_class_entities'][j])
+      ymin,xmin,ymax,xmax = result_out['detection_boxes'][j]
+      detect_ymin.append(ymin)
+      detect_xmin.append(xmin)
+      detect_ymax.append(ymax)
+      detect_xmax.append(xmax)
+  return {
+      'Score': detect_scores,
+      'Class': detect_classes,
+      'Ymin':  detect_ymin,
+      'Xmin': detect_xmin,
+      'Ymax': detect_ymax,
+      'Xmax':  detect_xmax,
+      'objectID':defineObjects(result_out=result_out)
+      }

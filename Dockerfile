@@ -143,4 +143,5 @@ RUN iris start $ISC_PACKAGE_INSTANCENAME && \
   && rm -f $ISC_PACKAGE_INSTALLDIR/mgr/messages.log \
   && rm -rf $SRC_DIR/isc $SRC_DIR/rtn
 
+
 HEALTHCHECK --interval=5s CMD /irisHealth.sh || exit 1

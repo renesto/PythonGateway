@@ -14,12 +14,17 @@
   <main>
   	<div class="spaceFiller"></div>
   	<div class="inline">
-  	<a href="camera.csp" target="_blank"><div id="camera" class="containerbig"><h2>Camera</h2></div></a>
-  	<div class="containersmall"><img src="arrow.svg"/></div>  	
-  	<a href="EnsPortal.ProductionConfig.zen?$NAMESPACE=PYTHON&IRISUserName=SuperUser&IRISPassword=SYS" target="_blank"><div id="interoperability" class="containerbig"><h2>Interoperability</h2><img src="interoperability.png"/></div></a>
-  	<div class="containersmall"><img src="arrow.svg"/></div>
-  	<a href="EnsPortal.BPLEditor.zen?NAMESPACE=PYTHON&BP=od.DetectObjects.bpl&IRISUserName=SuperUser&IRISPassword=SYS" target="_blank"><div id="objectdetection" class="containerbig"><h2>Recognize objects</h2><img src="TensorFlowLogo.svg"/><img src="Python_logo.svg"/></div></a>
-  </div>
+  	 <a href="camera.csp" target="_blank"><div id="camera" class="containerbig"><h2>Camera</h2></div></a>
+  	 <div class="containersmall"><img src="arrow.svg"/></div>  	
+  	 <a href="EnsPortal.ProductionConfig.zen?$NAMESPACE=PYTHON&IRISUserName=SuperUser&IRISPassword=SYS" target="_blank"><div id="interoperability" class="containerbig"><h2>Interoperability</h2><img src="interoperability.png"/></div></a>
+  	 <div class="containersmall"><img src="arrow.svg"/></div>
+  	 <a href="EnsPortal.BPLEditor.zen?NAMESPACE=PYTHON&BP=od.DetectObjects.bpl&IRISUserName=SuperUser&IRISPassword=SYS" target="_blank"><div id="objectdetection" class="containerbig"><h2>Recognize objects</h2><img src="TensorFlowLogo.svg"/><img src="Python_logo.svg"/></div></a>
+     <div class="containersmall"><img src="arrow.svg"/></div>
+      <a href="result.jpg" target="_blank"><div id="objectdetection" class="containerbig"><h2>Show<br/>Annotated<br/>Image</h2></div></a>
+      <div class="containersmall"><img src="arrow.svg"/></div>
+      <a href="/csp/sys/exp/%25CSP.UI.Portal.SQL.Home.zen?$NAMESPACE=PYTHON&IRISUserName=SuperUser&IRISPassword=SYS" target="_blank"><div id="objectdetection" class="containerbig"><h2>SQL<br/>Explorer</h2></div></a>
+    </div>
+    <div class="spaceFiller"></div>
 <!--
   	<div class="containersmall"><img src="arrow-left.svg"/></div>
   	<div class="containersmall"><img src="arrow-down.svg"/></div>

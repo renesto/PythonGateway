@@ -38,5 +38,5 @@ def detect_image(path):
             [detector_output, decoded_image],
             feed_dict={image_string_placeholder: image_string}
         )
-    return result_out
+    return {'result':result_out, 'image':image_out}
 

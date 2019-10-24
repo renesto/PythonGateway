@@ -28,7 +28,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </parameters>
 </property>
 </context>
-<sequence xend='200' yend='850' >
+<sequence xend='200' yend='950' >
 <call name='Send Value To Python' target='isc.py.ens.Operation' async='0' timeout='3000' xpos='200' ypos='250' >
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value="&quot;sample_image_path = r'&quot;_request.Filepath_&quot;/&quot;_request.Filename_&quot;'&quot;" action="set" />
@@ -56,7 +56,7 @@ tf.get_logger().setLevel('WARNING')
 tf.autograph.set_verbosity(2)
 sys.path.append(r'/home/irisuser/pycode')
 import od_utils
-import od_detect
+import od_detectf
 ]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value="process.GetAnnotation(&quot;Import Python Libraries&quot;)" action="set" />
@@ -64,7 +64,7 @@ import od_detect
 <response type='Ens.Response' />
 </call>
 <call name='Detect Objects' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='450' >
-<annotation><![CDATA[resultOut = od_detect.detect_image(sample_image_path)
+<annotation><![CDATA[resultOut = od_detectf.detect_image(sample_image_path)
 result=resultOut['result']
 image_out=resultOut['image']
 ]]></annotation>
@@ -88,14 +88,23 @@ exportableDF='{"objects":'+exportableDF+'}']]></annotation>
 <assign property="context.ObjectsAsString" value="callresponse.Variables.GetAt(&quot;exportableDF&quot;)" action="set" />
 </response>
 </call>
-<code xpos='200' ypos='650' >
+<code name='Store Data Into IRIS' xpos='200' ypos='650' >
 <![CDATA[
   set ol=##class(od.ObjectsList).%New()
-  set ol.TimeStamp=$zts
  s sc = ol.%JSONImport(context.ObjectsAsString)
  do ol.%Save()]]>
 </code>
-<call name='Annotate Image' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='750' >
+<code name='Calculate Shelf Status' xpos='200' ypos='750' >
+<![CDATA[
+  SET myquery = "SELECT Class, COUNT(*) As cnt FROM od.Objects Where Timestamp = (Select MAX(Timestamp) from od.Objects) group by Class"
+  SET tStatement = ##class(%SQL.Statement).%New()
+  SET qStatus = tStatement.%Prepare(myquery)
+  IF qStatus'=1 {WRITE "%Prepare failed:" DO $System.Status.DisplayError(qStatus) QUIT}
+  SET rset = tStatement.%Execute()
+  WHILE rset.%Next() { set ^status(rset.Class)=rset.cnt }
+]]>
+</code>
+<call name='Annotate Image' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='850' >
 <annotation><![CDATA[image_with_boxes = od_utils.draw_boxes(np.array(image_out), resultDF[['Ymin','Xmin','Ymax','Xmax']].to_numpy(),resultDF['Class'].to_numpy(), resultDF['Score'].to_numpy(), max_boxes=100, min_score=0.2)
 im = Image.fromarray(image_with_boxes)
 im.save("/usr/irissys/csp/python/result.jpg")]]></annotation>

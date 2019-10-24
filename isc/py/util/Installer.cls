@@ -40,6 +40,10 @@ XData Install [ XMLNamespace = INSTALLER ]
     <Arg Value="${SOURCESPATH}rtn"/>
     </Invoke>
 
+	<Invoke Class="isc.py.util.Installer" Method="EnableAnalytics" CheckStatus="true">
+      <Arg Value="/csp/python/"/>
+    </Invoke>
+
     <Invoke Class="isc.py.util.Installer" Method="CreateREST">
    <Arg Value="${NameSpace}"/>
    <Arg Value="/rest/imageod"/>
@@ -182,7 +186,6 @@ ClassMethod PatchBP() As %Status
 
 ClassMethod CreateREST(namespace2 As %String, url As %String, dispatch As %String) As %Status
 {
-	s ^SYS("Security","CSP","AllowPrefix",0,"%DeepSee.")=1
 	#dim sc As %Status = $$$OK
     new $namespace
     set $namespace = "%SYS"
@@ -197,5 +200,13 @@ ClassMethod CreateREST(namespace2 As %String, url As %String, dispatch As %Strin
     quit sc
 }
 
+ClassMethod EnableAnalytics(pCSPName As %String, url As %String) As %Status
+{
+  new $namespace
+  znspace "%SYS"
+  set props("DeepSeeEnabled")=1
+  do ##class(Security.Applications).Modify(pCSPName,.props)
+  quit $$$OK
+ }
 
 }

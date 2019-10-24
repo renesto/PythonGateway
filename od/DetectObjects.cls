@@ -92,7 +92,7 @@ exportableDF='{"objects":'+exportableDF+'}']]></annotation>
 <![CDATA[
   set ol=##class(od.ObjectsList).%New()
   set ol.TimeStamp=$zts
- s sc = ol.%JSONImport(context.ObjectAsString)
+ s sc = ol.%JSONImport(context.ObjectsAsString)
  do ol.%Save()]]>
 </code>
 <call name='Annotate Image' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='750' >

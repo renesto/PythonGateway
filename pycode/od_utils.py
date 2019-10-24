@@ -166,5 +166,6 @@ def TFtoPANDAS(result_out):
       'Xmin': detect_xmin,
       'Ymax': detect_ymax,
       'Xmax':  detect_xmax,
-      'objectID':defineObjects(result_out=result_out)
+      'objectID':defineObjects(result_out=result_out),
+      'Timestamp':time.time()
       }

@@ -1,6 +1,3 @@
-/// resultDF=TFtoPANDAS(result_out)
-/// resultDF=resultDF.loc[resultDF.reset_index().groupby(['objectID'])['Score'].idxmax()]
-/// resultDF=resultDF[resultDF['Class']!=b'Shelf']
 /// 
 Class od.DetectObjects Extends (Ens.BusinessProcessBPL, isc.py.ens.ProcessUtils)
 {
@@ -81,17 +78,22 @@ image_out=resultOut['image']
 <annotation><![CDATA[resultDF=pd.DataFrame(od_utils.TFtoPANDAS(result))
 resultDF=resultDF.loc[resultDF.reset_index().groupby(['objectID'])['Score'].idxmax()]
 resultDF=resultDF[resultDF['Class']!=b'Shelf']
-exportableDF=resultDF[resultDF['Score']>0.2].to_csv(index=False)]]></annotation>
+exportableDF=resultDF[resultDF['Score']>0.2].to_json(orient='records')
+exportableDF='{"objects":'+exportableDF+'}']]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value="process.GetAnnotation(&quot;Prepare Results&quot;)" action="set" />
 <assign property="callrequest.Variables" value="&quot;exportableDF&quot;" action="set" />
 </request>
 <response type='isc.py.msg.ExecutionResponse' >
-<assign property="context.ObjectsAsString" value="callresponse.Variables" action="set" />
+<assign property="context.ObjectsAsString" value="callresponse.Variables.GetAt(&quot;exportableDF&quot;)" action="set" />
 </response>
 </call>
-<code xpos='200' ypos='650' disabled="true">
-<![CDATA[ s ^exportableDF = context.exportableDF]]>
+<code xpos='200' ypos='650' >
+<![CDATA[
+  set ol=##class(od.ObjectsList).%New()
+  set ol.TimeStamp=$zts
+ s sc = ol.%JSONImport(context.ObjectAsString)
+ do ol.%Save()]]>
 </code>
 <call name='Annotate Image' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='750' >
 <annotation><![CDATA[image_with_boxes = od_utils.draw_boxes(np.array(image_out), resultDF[['Ymin','Xmin','Ymax','Xmax']].to_numpy(),resultDF['Class'].to_numpy(), resultDF['Score'].to_numpy(), max_boxes=100, min_score=0.2)

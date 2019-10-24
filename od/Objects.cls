@@ -1,4 +1,4 @@
-Class od.Objects Extends %Persistent
+Class od.Objects Extends (%Persistent,%JSON.Adaptor)
 {
 Property Score As %Double;
 
@@ -15,6 +15,8 @@ Property Xmax As %Double;
 Property objectID As %Integer;
 
 Property Timestamp As %Library.TimeStamp;
+
+
 
 Storage Default
 {

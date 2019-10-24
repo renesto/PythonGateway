@@ -182,7 +182,7 @@ ClassMethod PatchBP() As %Status
 
 ClassMethod CreateREST(namespace2 As %String, url As %String, dispatch As %String) As %Status
 {
-
+	s ^SYS("Security","CSP","AllowPrefix",0,"%DeepSee.")=1
 	#dim sc As %Status = $$$OK
     new $namespace
     set $namespace = "%SYS"

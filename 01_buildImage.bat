@@ -1,0 +1,1 @@
+docker image build --tag akovacev/iris-python-gateway:2019.03.2 .

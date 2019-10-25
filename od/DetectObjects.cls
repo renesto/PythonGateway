@@ -27,8 +27,9 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <parameter name='MAXLEN'  value='' />
 </parameters>
 </property>
+<property name='status' type='%Integer' collection='array' instantiate='0' />
 </context>
-<sequence xend='200' yend='950' >
+<sequence xend='200' yend='1050' >
 <call name='Send Value To Python' target='isc.py.ens.Operation' async='0' timeout='3000' xpos='200' ypos='250' >
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value="&quot;sample_image_path = r'&quot;_request.Filepath_&quot;/&quot;_request.Filename_&quot;'&quot;" action="set" />
@@ -91,8 +92,11 @@ exportableDF='{"objects":'+exportableDF+'}']]></annotation>
 <code name='Store Data Into IRIS' xpos='200' ypos='650' >
 <![CDATA[
   set ol=##class(od.ObjectsList).%New()
- s sc = ol.%JSONImport(context.ObjectsAsString)
- do ol.%Save()]]>
+  s sc = ol.%JSONImport(context.ObjectsAsString)
+  set ^checkthis("sc")=sc
+  set ^checkthis("context")=context.ObjectsAsString
+  set ^checkthis("old")=ol
+  do ol.%Save()]]>
 </code>
 <code name='Calculate Shelf Status' xpos='200' ypos='750' >
 <![CDATA[
@@ -101,10 +105,18 @@ exportableDF='{"objects":'+exportableDF+'}']]></annotation>
   SET qStatus = tStatement.%Prepare(myquery)
   IF qStatus'=1 {WRITE "%Prepare failed:" DO $System.Status.DisplayError(qStatus) QUIT}
   SET rset = tStatement.%Execute()
-  WHILE rset.%Next() { set ^status(rset.Class)=rset.cnt }
+  WHILE rset.%Next() { set sc=context.status.SetAt(rset.cnt, rset.Class) }
 ]]>
 </code>
-<call name='Annotate Image' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='850' >
+<call name='Order Routing' target='odRouter' async='1' xpos='200' ypos='850' >
+<request type='od.msg.odRouterRequest' >
+<assign property="callrequest.Apples" value="context.status.GetAt(&quot;APPLE&quot;)" action="set" />
+<assign property="callrequest.Bananas" value="context.status.GetAt(&quot;BANANA&quot;)" action="set" />
+<assign property="callrequest.Oranges" value="context.status.GetAt(&quot;ORANGE&quot;)" action="set" />
+</request>
+<response type='Ens.Response' />
+</call>
+<call name='Annotate Image' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='950' >
 <annotation><![CDATA[image_with_boxes = od_utils.draw_boxes(np.array(image_out), resultDF[['Ymin','Xmin','Ymax','Xmax']].to_numpy(),resultDF['Class'].to_numpy(), resultDF['Score'].to_numpy(), max_boxes=100, min_score=0.2)
 im = Image.fromarray(image_with_boxes)
 im.save("/usr/irissys/csp/python/result.jpg")]]></annotation>

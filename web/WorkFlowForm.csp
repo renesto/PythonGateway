@@ -1,0 +1,19 @@
+<html>
+  <body>
+  <table>
+  <tr>
+    <td>Apples: </td>
+    <td>#(%task.%FormValues.GetAt("Apples"))#</td>
+  </tr>
+  <tr>
+    <td>Oranges: </td>
+    <td>#(%task.%FormValues.GetAt("Oranges"))#</td>
+  </tr>
+  <tr>
+    <td>Bananas: </td>
+    <td>#(%task.%FormValues.GetAt("Bananas"))#</td>
+  </tr>
+</table>
+  <img src="result.jpg?123"/>
+  </body>
+</html>

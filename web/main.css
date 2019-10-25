@@ -8,7 +8,14 @@ body {
 	text-shadow: 1px 1px #aaa;
 }
 
-
+.handout {
+  text-align:center;
+  height:80px;
+}
+.handout img {
+  height: 60%;
+    width: auto;
+}
 
 .header {
   border-bottom: 10px solid black;

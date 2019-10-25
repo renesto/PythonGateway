@@ -14,7 +14,7 @@ Property Xmax As %Double;
 
 Property objectID As %Integer;
 
-Property Timestamp As %Library.TimeStamp;
+Property Timestamp As %Double;
 
 
 

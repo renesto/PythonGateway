@@ -21,6 +21,16 @@ XData ProductionDefinition
   </Item>
   <Item Name="od.DetectObjects" Category="" ClassName="od.DetectObjects" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
+  <Item Name="od.EscalatedodWorkflow" Category="" ClassName="od.EscalatedodWorkflow" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
+  <Item Name="od.NormalodWorkflow" Category="" ClassName="od.NormalodWorkflow" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
+  <Item Name="Order Team" Category="" ClassName="EnsLib.Workflow.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Host" Name="AutoCreateRole">1</Setting>
+  </Item>
+  <Item Name="odRouter" Category="" ClassName="EnsLib.MsgRouter.RoutingEngine" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Host" Name="BusinessRuleName">od.odRouterRoutingRule</Setting>
+  </Item>
 </Production>
 }
 

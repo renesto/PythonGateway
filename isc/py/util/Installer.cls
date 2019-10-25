@@ -19,6 +19,8 @@ XData Install [ XMLNamespace = INSTALLER ]
     <Import File="${SOURCESPATH}od" Recurse="1"/>
     <Import File="/usr/irissys/csp/python/index.csp"/>
     <Import File="/usr/irissys/csp/python/camera.csp"/>
+    <Import File="/usr/irissys/csp/python/WorkFlowForm.csp"/>
+    <Import File="/usr/irissys/csp/python/EscalatedWorkFlowForm.csp"/>
 
 
 	<CSPApplication Url="/csp/${Namespace}" Directory="${CSPDIR}${Namespace}" />
@@ -40,16 +42,20 @@ XData Install [ XMLNamespace = INSTALLER ]
     <Arg Value="${SOURCESPATH}rtn"/>
     </Invoke>
 
+	<Log Level="1" Text="Enabling Analytics"/>
 	<Invoke Class="isc.py.util.Installer" Method="EnableAnalytics" CheckStatus="true">
       <Arg Value="/csp/python/"/>
     </Invoke>
 
+	<Log Level="1" Text="Configuring REST"/>
     <Invoke Class="isc.py.util.Installer" Method="CreateREST">
    <Arg Value="${NameSpace}"/>
    <Arg Value="/rest/imageod"/>
    <Arg Value="od.RestServer"/>
    </Invoke>
 
+	<Log Level="1" Text="Configuring Workflow Rules"/>
+    <Invoke Class="isc.py.util.Installer" Method="AddWorkflowRules"/>
     <Production Name="isc.py.test.Production"  AutoStart="1" />
   </Namespace>
 </Manifest>
@@ -208,5 +214,16 @@ ClassMethod EnableAnalytics(pCSPName As %String, url As %String) As %Status
   do ##class(Security.Applications).Modify(pCSPName,.props)
   quit $$$OK
  }
+
+ClassMethod AddWorkflowRules() As %Status
+{
+    do ##class(EnsLib.Workflow.UserDefinition).CreateUser("SuperUser","SU Account")
+	do ##class(EnsLib.Workflow.RoleDefinition).CreateRole("OrderTeam")
+	do ##class(EnsLib.Workflow.RoleDefinition).AddUserToRole("OrderTeam","SuperUser")
+ }
+
+   
+ 
+
 
 }

@@ -1,0 +1,21 @@
+<html>
+<head>
+	<style type="text/css">
+		.container {
+    width: 200px;
+}
+
+/* resize images */
+.container img {
+    width: 100%;
+    height: auto;
+}
+	</style>
+	</head>
+  <body>
+There is a mouse!
+<div class="container">
+  <img src="result.jpg?123"/>
+</div>
+  </body>
+</html>

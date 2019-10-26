@@ -108,20 +108,20 @@ exportableDF='{"objects":'+exportableDF+'}']]></annotation>
   WHILE rset.%Next() { set sc=context.status.SetAt(rset.cnt, rset.Class) }
 ]]>
 </code>
-<call name='Order Routing' target='odRouter' async='1' xpos='200' ypos='850' >
-<request type='od.msg.odRouterRequest' >
-<assign property="callrequest.Apples" value="context.status.GetAt(&quot;APPLE&quot;)" action="set" />
-<assign property="callrequest.Bananas" value="context.status.GetAt(&quot;BANANA&quot;)" action="set" />
-<assign property="callrequest.Oranges" value="context.status.GetAt(&quot;ORANGE&quot;)" action="set" />
-</request>
-<response type='Ens.Response' />
-</call>
-<call name='Annotate Image' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='950' >
+<call name='Annotate Image' target='isc.py.ens.Operation' async='0' timeout='300000' xpos='200' ypos='850' >
 <annotation><![CDATA[image_with_boxes = od_utils.draw_boxes(np.array(image_out), resultDF[['Ymin','Xmin','Ymax','Xmax']].to_numpy(),resultDF['Class'].to_numpy(), resultDF['Score'].to_numpy(), max_boxes=100, min_score=0.2)
 im = Image.fromarray(image_with_boxes)
 im.save("/usr/irissys/csp/python/result.jpg")]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value="process.GetAnnotation(&quot;Annotate Image&quot;)" action="set" />
+</request>
+<response type='Ens.Response' />
+</call>
+<call name='Order Routing' target='odRouter' async='1' xpos='200' ypos='950' >
+<request type='od.msg.odRouterRequest' >
+<assign property="callrequest.Apples" value="context.status.GetAt(&quot;APPLE&quot;)" action="set" />
+<assign property="callrequest.Bananas" value="context.status.GetAt(&quot;BANANA&quot;)" action="set" />
+<assign property="callrequest.Oranges" value="context.status.GetAt(&quot;ORANGE&quot;)" action="set" />
 </request>
 <response type='Ens.Response' />
 </call>
